@@ -507,13 +507,13 @@
 <p><img src="/2021/11/09/wei-xie-jian-mo/STRIDE.jpg"></p>
 <h2 id="威胁建模流程"><a href="#威胁建模流程" class="headerlink" title="威胁建模流程"></a>威胁建模流程</h2><p><img src="/2021/11/09/wei-xie-jian-mo/wei-xie-jian-mo-liu-cheng.jpg"></p>
 <h3 id="数据流图"><a href="#数据流图" class="headerlink" title="数据流图"></a>数据流图</h3><p>STRIDE建模的第一步就是分解业务场景，绘制数据流图(DFD)。<strong>威胁建模针对的是一个个具体场景</strong>，所以首先需要对我们的系统根据实际情况进行业务场景的分解，比如登录场景、交易场景、审批场景、灾备场景等等，具体是什么场景以及有多少个场景，是和实际的系统和业务息息相关的。<strong>分解完业务场景以后，就对一个一个的场景分别进行STRIDE威胁建模</strong>，每个场景的STRIDE威胁建模是相对独立的。 首先对一个具体的场景绘制数据流图（DFD），一个简单Web应用的数据流图如下所示：</p>
-<p><img src="/2021/11/09/wei-xie-jian-mo/shu-ju-liu-tu.png"></p>
+<p><img src="/2021/11/09/wei-xie-jian-mo/%E5%A8%81%E8%83%81%E5%BB%BA%E6%A8%A1%5C%E6%95%B0%E6%8D%AE%E6%B5%81%E5%9B%BE.png"></p>
 <h3 id="识别威胁"><a href="#识别威胁" class="headerlink" title="识别威胁"></a>识别威胁</h3><p>STRIDE威胁建模方法已经明确了<strong>每个数据流图元素具有不同的威胁</strong>，其中外部实体只有仿冒（S）、抵赖（R）威胁，数据流只有篡改（T）、信息泄露（I）、拒绝服务（D）威胁，处理过程有所有六种（STRIDE）威胁，存储过程有篡改（T）、信息泄露（I）、拒绝服务（D）威胁，但如果是日志类型存储则还有抵赖（R）威胁。具体可以对照如下表格进行威胁识别: </p>
-<p><img src="/2021/11/09/wei-xie-jian-mo/shi-bie-wei-xie.png"></p>
+<p><img src="/2021/11/09/wei-xie-jian-mo/%E5%A8%81%E8%83%81%E5%BB%BA%E6%A8%A1%5C%E8%AF%86%E5%88%AB%E5%A8%81%E8%83%81.png"></p>
 <h3 id="缓解措施"><a href="#缓解措施" class="headerlink" title="缓解措施"></a>缓解措施</h3><p>根据不同的数据流图元素及威胁，相应的缓解措施也不相同。下表是一些威胁类别的通用性缓解方案：</p>
-<p><img src="/2021/11/09/wei-xie-jian-mo/huan-jie-cuo-shi.png"></p>
+<p><img src="/2021/11/09/wei-xie-jian-mo/%E5%A8%81%E8%83%81%E5%BB%BA%E6%A8%A1%5C%E7%BC%93%E8%A7%A3%E6%8E%AA%E6%96%BD.png"></p>
 <p>分析完数据流图中的所有对象的潜在威胁以后，就要输出一个威胁列表，威胁列表中的每个威胁项如下表：</p>
-<p><img src="/2021/11/09/wei-xie-jian-mo/wei-xie-lie-biao.jpg"></p>
+<p><img src="/2021/11/09/wei-xie-jian-mo/blog\source_posts\威胁建模\威胁列表.jpg"></p>
 <h3 id="安全验证"><a href="#安全验证" class="headerlink" title="安全验证"></a>安全验证</h3><p>在威胁建模完成后，需要对整个过程进行回顾，不仅要确认缓解措施是否能够真正缓解潜在威胁，同时验证数据流图是否符合设计，代码实现是否符合预期设计，所有的威胁是否都有相应缓解措施。最后将威胁建模报告留存档案，作为后续迭代开发、增量开发时威胁建模的参考依据。</p>
 
                 
