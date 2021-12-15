@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>AI安全之对抗样本攻击</title>
+      <link href="/2021/11/14/ai-an-quan-zhi-dui-kang-yang-ben-gong-ji/"/>
+      <url>/2021/11/14/ai-an-quan-zhi-dui-kang-yang-ben-gong-ji/</url>
+      
+        <content type="html"><![CDATA[<h1 id="AI安全之对抗样本攻击"><a href="#AI安全之对抗样本攻击" class="headerlink" title="AI安全之对抗样本攻击"></a>AI安全之对抗样本攻击</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>对抗样本，就是对输入数据进行略微修改，以使得机器学习算法对该输入给出错误的分类结果。在很多情况下，这些修改非常细微，人类观察者甚至根本不会注意到这些修改，但是分类器却会因此犯错误。对抗样本攻击对目前的机器学习系统提出了挑战，因为即使攻击者无法访问基础模型，也能对机器学习系统发起攻击。</p><p><img src="/2021/11/14/ai-an-quan-zhi-dui-kang-yang-ben-gong-ji/1.jpg" alt="原图像与对抗样本图像"></p><h2 id="ADVBOX对抗样本工具箱"><a href="#ADVBOX对抗样本工具箱" class="headerlink" title="ADVBOX对抗样本工具箱"></a>ADVBOX对抗样本工具箱</h2><p>下载地址：<a href="https://github.com/advboxes/ADVBOX">https://github.com/advboxes/ADVBOX</a></p><p>该工具支持多种攻击方法，包括白盒、黑盒</p><p>可以用来生成对抗样本</p><h3 id="白盒攻击（White-box-attack-methods）"><a href="#白盒攻击（White-box-attack-methods）" class="headerlink" title="白盒攻击（White-box attack methods）"></a>白盒攻击（White-box attack methods）</h3><ul><li>L-BFGS</li><li>FOSM </li><li>BIM</li><li>ILCM</li><li>MI-FGSM</li><li>JSMA</li><li>DeepFool</li><li>C/W</li></ul><h3 id="黑盒攻击（Black-box-attack-methods）"><a href="#黑盒攻击（Black-box-attack-methods）" class="headerlink" title="黑盒攻击（Black-box attack methods）"></a>黑盒攻击（Black-box attack methods）</h3><ul><li>Single Pixel Attack</li><li>Local Search Attack</li></ul><h3 id="防御方法（Defense-methods）"><a href="#防御方法（Defense-methods）" class="headerlink" title="防御方法（Defense methods）"></a>防御方法（Defense methods）</h3><ul><li>Feature Squeezing</li><li>Spatial Smoothing</li><li>Lable Smoothing</li><li>Gaussian Augmentation</li><li></li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> AI安全 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>AI安全面临的风险与挑战</title>
       <link href="/2021/11/14/ai-an-quan-mian-lin-de-feng-xian-yu-tiao-zhan/"/>
       <url>/2021/11/14/ai-an-quan-mian-lin-de-feng-xian-yu-tiao-zhan/</url>
