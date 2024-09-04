@@ -1,0 +1,8 @@
+/* Here is your custom css styles. */
+@font-face{
+    font-family: 'Mochiy Pop P One';
+    src: url('https://fonts.google.com/specimen/Mochiy+Pop+P+One');   
+}
+body {
+    font-family: 'Mochiy Pop P One'; 
+}
