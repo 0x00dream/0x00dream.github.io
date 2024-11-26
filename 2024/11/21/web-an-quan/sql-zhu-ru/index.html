@@ -5,10 +5,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="sql注入, 0x00dream&#39;s blog">
-    <meta name="description" content="1.类型1.1宽字节注入####1.1.1原理
-首先，一个字节为窄字节，两个字节为宽字节。
+    <meta name="description" content="1.类型1.1宽字节注入1.1.1原理首先，一个字节为窄字节，两个字节为宽字节。
 由于php开启了magicqoutes魔法函数，会将用户输入的特殊字符（包括单引号，双引号，空格等）前面加一个反斜杠来进行转义，
-mysql的编码方">
+mysql的编码方式为GBK">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -436,7 +435,7 @@ mysql的编码方">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-11-25
+                    2024-11-26
                 </div>
                 
 
@@ -468,8 +467,7 @@ mysql的编码方">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-类型"><a href="#1-类型" class="headerlink" title="1.类型"></a>1.类型</h2><h3 id="1-1宽字节注入"><a href="#1-1宽字节注入" class="headerlink" title="1.1宽字节注入"></a>1.1宽字节注入</h3><p>####1.1.1原理</p>
-<p>首先，一个字节为窄字节，两个字节为宽字节。</p>
+                <h2 id="1-类型"><a href="#1-类型" class="headerlink" title="1.类型"></a>1.类型</h2><h3 id="1-1宽字节注入"><a href="#1-1宽字节注入" class="headerlink" title="1.1宽字节注入"></a>1.1宽字节注入</h3><h4 id="1-1-1原理"><a href="#1-1-1原理" class="headerlink" title="1.1.1原理"></a>1.1.1原理</h4><p>首先，一个字节为窄字节，两个字节为宽字节。</p>
 <p>由于<code>php</code>开启了<code>magicqoutes</code>魔法函数，会将用户输入的特殊字符（包括单引号，双引号，空格等）前面加一个反斜杠来进行转义，</p>
 <p><code>mysql</code>的编码方式为<code>GBK</code>，众所周知这是一个中文编码方式，它会将第一个字节的<code>ascll</code>码大于128的两个字节解释为一个汉字，反斜杠的<code>url</code>编码是<code>%5c</code>，所以我们在特殊字符被转义的情况下进行注入的话，就可以在闭合符前面加上<code>%df</code>等<code>ascll</code>码大于128的一个字节，这样<code>mysql</code>就会将<code>%df%5c</code>认为是一个汉字，后面的闭合符就会正常执行，从而绕过<code>php</code>的转义机制。</p>
 <p><code>url?id=1%df' union select .......</code></p>
@@ -503,8 +501,7 @@ id    |   username    |  password
 绕过：可控<span class="token number">1</span><span class="token operator">=</span>a\  可控<span class="token number">2</span><span class="token operator">=</span><span class="token keyword">or</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment"># ===&gt;$sql="select * from wp_news where id='a\' and title=' or sleep(1)#'"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>若对单引号进行了转义，可以使用宽字节注入(在单双引号前面加%df)，或者使用<code>addslashed</code>函数对输入的字符串进行编码，这样其中的特殊字符就不会被转义。</p>
-<p>##3.防御</p>
-<h3 id="3-1-sql语句预编译"><a href="#3-1-sql语句预编译" class="headerlink" title="3.1 sql语句预编译"></a>3.1 sql语句预编译</h3><h4 id="3-1-1-php预编译"><a href="#3-1-1-php预编译" class="headerlink" title="3.1.1 php预编译"></a>3.1.1 php预编译</h4><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<h2 id="3-防御"><a href="#3-防御" class="headerlink" title="3.防御"></a>3.防御</h2><h3 id="3-1-sql语句预编译"><a href="#3-1-sql语句预编译" class="headerlink" title="3.1 sql语句预编译"></a>3.1 sql语句预编译</h3><h4 id="3-1-1-php预编译"><a href="#3-1-1-php预编译" class="headerlink" title="3.1.1 php预编译"></a>3.1.1 php预编译</h4><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
 <span class="token comment">// 创建 MySQLi 连接</span>
 <span class="token variable">$mysqli</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">mysqli</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"localhost"</span><span class="token punctuation">,</span> <span class="token string double-quoted-string">"username"</span><span class="token punctuation">,</span> <span class="token string double-quoted-string">"password"</span><span class="token punctuation">,</span> <span class="token string double-quoted-string">"database_name"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
