@@ -5,8 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="CC链, 0x00dream&#39;s blog">
-    <meta name="description" content="漏洞原理###1.transform
-在org/apache/commons/collections/functors/InvokerTransformer#transform中存在一段利用反射技术执行任意代码的代码，这就是CC链的核心，我">
+    <meta name="description" content="漏洞原理1.transform在org/apache/commons/collections/functors/InvokerTransformer#transform中存在一段利用反射技术执行任意代码的代码，这就是CC链的核心，我们后续利">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -434,14 +433,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-03-30
+                    2025-03-31
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    498
+                    497
                 </div>
                 
 
@@ -466,8 +465,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>###1.transform</p>
-<p>在<code>org/apache/commons/collections/functors/InvokerTransformer#transform</code>中存在一段利用反射技术执行任意代码的代码，这就是CC链的核心，我们后续利用CC链攻击的时候实际上就是想方设法构造链条让程序去执行这个<code>transform</code>方法，给它传入一个恶意类，它就可以通过它本身其中的反射技术去执行这个恶意类。例如，传入的是<code>Runtime</code>对象时，就可以执行任意系统命令。</p>
+                <h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><h3 id="1-transform"><a href="#1-transform" class="headerlink" title="1.transform"></a>1.transform</h3><p>在<code>org/apache/commons/collections/functors/InvokerTransformer#transform</code>中存在一段利用反射技术执行任意代码的代码，这就是CC链的核心，我们后续利用CC链攻击的时候实际上就是想方设法构造链条让程序去执行这个<code>transform</code>方法，给它传入一个恶意类，它就可以通过它本身其中的反射技术去执行这个恶意类。例如，传入的是<code>Runtime</code>对象时，就可以执行任意系统命令。</p>
 <h3 id="2-ChainedTransformer"><a href="#2-ChainedTransformer" class="headerlink" title="2.ChainedTransformer"></a>2.ChainedTransformer</h3><p>在<code>org/apache/commons/collections/functors/ChainedTransformer#transform</code>中，通过遍历<code>this.iTransformers</code>来调用数组中每一个对象的<code>transform</code>方法。结合上面的代码，可以构造出链式调用<code>Runtime.getRuntime().exec("calc")</code>，此时便成功向系统注入了一个<code>Runtime</code>对象，完成了任意代码执行，这便是<code>Commons Collection</code>反序列化漏洞的核心。</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">Object</span> <span class="token function">transform</span><span class="token punctuation">(</span><span class="token class-name">Object</span> object<span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>iTransformers<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
