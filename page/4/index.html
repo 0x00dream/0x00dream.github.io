@@ -348,6 +348,155 @@
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/2024/08/06/er-jin-zhi-an-quan/pwn-xiang-guan-gong-ju-shi-yong/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="pwn相关工具使用">
+                            
+                            <span class="card-title">pwn相关工具使用</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                checksec查看程序的保护
+checksec   --file='./vul'
+
+ROPgadget查看程序中指令片段地址
+ropgadget   --binary  ./vul   --only  'pop|ret'  | grep 
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-06
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                0x00dream
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/">
+                            <span class="chip bg-color">二进制安全</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2024/08/06/er-jin-zhi-an-quan/zhan-yi-chu/zhan-yi-chu-zhi-exp/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="栈溢出之exp">
+                            
+                            <span class="card-title">栈溢出之exp</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                
+首先加载库函数  （pwntools）
+from pwn import *
+
+常用函数shellcraft.sh()   # 字符串类型的shellcode
+asm()    asm(shellcraft.sh())   # 将字符串打包
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-06
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                0x00dream
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8-%E6%A0%88%E6%BA%A2%E5%87%BA/">
+                            <span class="chip bg-color">二进制安全,栈溢出</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2024/08/02/dai-ma-an-quan-yu-shen-ji/nei-cun-xie-lou/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="内存泄漏">
+                            
+                            <span class="card-title">内存泄漏</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                姿势int a = new int;
+a = 1;
+free(a);
+
+原理：如果free掉该内存后，仍然访问该内存地址，导致泄露
+
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-02
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                0x00dream
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%89%E5%85%A8%E4%B8%8E%E5%AE%A1%E8%AE%A1/">
+                            <span class="chip bg-color">代码安全与审计</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/2024/08/01/fuzz/afl/">
                         <div class="card-image">
                             
@@ -769,7 +918,7 @@ I. C/C++使用错误
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">32.1k</span>
+                        class="white-color">32.9k</span>
             
             
             

