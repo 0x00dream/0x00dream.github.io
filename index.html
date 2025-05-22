@@ -637,27 +637,175 @@ I. C/C++使用错误
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2025/03/30/java-an-quan/urldns-lian/">
+                    <a href="/2025/05/11/ctf-shua-ti/rce-php-rao-guo/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="URLDNS链">
+                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="RCE_php绕过">
                             
-                            <span class="card-title">URLDNS链</span>
+                            <span class="card-title">RCE_php绕过</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                原理通过反射调用环境自带的类java.net.URL的hashcode方法，去访问URL地址，触发恶意类的执行。
-public class URLDNS {
-    public static void main(String[] args
+                                一、RCE_php过滤掉很多函数的绕过重点：使用print函数输出php代码执行结果   print==echo 
+1.题目源码&lt;?php
+# flag in flag.php
+include("flag.php");
+if(isse
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-03-30
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-05-11
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                0x00dream
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/CTF/">
+                            <span class="chip bg-color">CTF</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2025/05/11/ctf-shua-ti/dnslog-wai-dai-rce/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="dnslog外带RCE">
+                            
+                            <span class="card-title">dnslog外带RCE</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                一、命令执行不回显，利用dnslog外带1.题目源码&lt;?php
+
+if(isset($_POST['cmd'])){
+    @exec($_POST['cmd'],$res,$rc);
+    //echo $rc;
+}else{
+
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-05-11
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                0x00dream
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/CTF/">
+                            <span class="chip bg-color">CTF</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2025/05/07/ctf-shua-ti/php-qu-fan-rao-guo/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="php-取反绕过">
+                            
+                            <span class="card-title">php-取反绕过</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                一、题目源码&lt;?php
+error_reporting(0);
+if(isset($_GET['code'])){
+            $code=$_GET['code'];
+                    if(str
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-05-07
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                0x00dream
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/CTF/">
+                            <span class="chip bg-color">CTF</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2025/05/06/java-an-quan/spring-kuang-jia-lou-dong-zong-jie/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Spring框架漏洞总结">
+                            
+                            <span class="card-title">Spring框架漏洞总结</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                
+
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-05-06
                             </span>
                             <span class="publish-author">
                                 
@@ -684,32 +832,76 @@ public class URLDNS {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2025/03/30/java-an-quan/shiro-fan-xu-lie-hua/">
+                    <a href="/2025/04/29/hw/hw-mian-shi-ti/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="shiro反序列化">
+                            <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="HW面试题">
                             
-                            <span class="card-title">shiro反序列化</span>
+                            <span class="card-title">HW面试题</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                漏洞原理
-漏洞特征：rememberMe=DeleteMe
-利用过程
-构造序列化字符串
-进行AES加密（需要获取AES的加密属性，包括密钥，偏移量）（key, iv, model）
-进行Base64加密
-
-
+                                1、反序列化攻击response的返回状态码是500是否攻击成功？​    你在数据包里面看到有明显的反序列化数据就得注意，特别是看到包里面有yv66vgAAADE这种字样，这是base64过后的 强反序列化打内存马特征。很多中间件和打内存
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-03-30
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-29
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                0x00dream
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/HW/">
+                            <span class="chip bg-color">HW</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2025/04/27/java-an-quan/nei-cun-ma/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="内存马">
+                            
+                            <span class="card-title">内存马</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                一、什么是内存马无文件的webshell，通过访问路径的方法去请求webshell，不会落下文件。
+二、内存马要做什么？
+先写一个马
+注册进tomcat
+
+三、内存马的类型1-3是通过添加新的路径
+1.Servlet内存马（动态注册Serv
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-27
                             </span>
                             <span class="publish-author">
                                 
@@ -736,25 +928,29 @@ public class URLDNS {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2025/03/30/java-an-quan/cc-lian/">
+                    <a href="/2025/04/24/ctf-shua-ti/shu-xue-han-shu-zhuan-huan-ming-ling-zhi-xing/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="CC链">
+                            <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="数学函数转换命令执行">
                             
-                            <span class="card-title">CC链</span>
+                            <span class="card-title">数学函数转换命令执行</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                漏洞原理1.transform在org/apache/commons/collections/functors/InvokerTransformer#transform中存在一段利用反射技术执行任意代码的代码，这就是CC链的核心，我们后续利
+                                BUUCTF——[CISCN 2019 初赛]Love Math1.题目源码&lt;?php
+error_reporting(0);
+//听说你很喜欢数学，不知道你是否爱它胜过爱flag
+if(!isset($_GET['c'])){
+  
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-03-30
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-24
                             </span>
                             <span class="publish-author">
                                 
@@ -768,8 +964,8 @@ public class URLDNS {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/java%E5%AE%89%E5%85%A8/">
-                            <span class="chip bg-color">java安全</span>
+                        <a href="/tags/CTF/">
+                            <span class="chip bg-color">CTF</span>
                         </a>
                         
                     </div>
@@ -781,29 +977,32 @@ public class URLDNS {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2025/03/17/web-an-quan/ssrf/">
+                    <a href="/2025/04/24/ctf-shua-ti/ctf-san-ban-fu/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="SSRF">
+                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="CTF三板斧">
                             
-                            <span class="card-title">SSRF</span>
+                            <span class="card-title">CTF三板斧</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                1.gophergopher://&lt;host&gt;:&lt;port&gt;/&lt;gopher-path&gt;TCP数据流
+                                CTF中web题目下手三板斧
+F12查看网页源码，找提示信息
+/robots.txt查看有无提示信息
+dirsearch扫目录
+访问.git看是否有git源码泄露
+仔细查看网站给出的提示语，脑洞大开。
 
-GET请求
-&lt;         GET /get.php?name=bob HTTP/1.1
 
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-03-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-24
                             </span>
                             <span class="publish-author">
                                 
@@ -817,8 +1016,8 @@ GET请求
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/web%E5%AE%89%E5%85%A8/">
-                            <span class="chip bg-color">web安全</span>
+                        <a href="/tags/CTF/">
+                            <span class="chip bg-color">CTF</span>
                         </a>
                         
                     </div>
@@ -830,27 +1029,172 @@ GET请求
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2025/03/11/nei-wang-shen-tou/kerberoast-gong-ji/">
+                    <a href="/2025/04/24/ctf-shua-ti/bu-er-mang-zhu-ti-mu/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Kerberoast 攻击">
+                            <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="布尔盲注题目">
                             
-                            <span class="card-title">Kerberoast 攻击</span>
+                            <span class="card-title">布尔盲注题目</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                1.Kerberoast 攻击概述Kerberoast 是一种针对 Kerberos 协议 的攻击技术，主要利用 服务票据（Service Ticket） 的特性，通过离线破解获取服务账户的明文密码。
-2.攻击原理
-Kerberos 协议流
+                                布尔盲注——[极客大挑战 2019]FinalSQL1.利用异或判断注入点http://30405780-8762-480c-a9ec-5fe5a07033ad.node5.buuoj.cn:81/search.php?id=1^0  #结
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-03-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-24
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                0x00dream
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/CTF/">
+                            <span class="chip bg-color">CTF</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2025/04/24/ctf-shua-ti/er-ci-zhu-ru-ti-mu/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="二次注入题目">
+                            
+                            <span class="card-title">二次注入题目</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                记一次二次注入的CTF题：BUUCTF  [SWPU2019]Web1
+注册账号，创建公告（一次注入，将sql语句注入到数据库中，注入点为公告名称）
+查看公告，后端会将此前注入进去的公告名称作为条件语句，去执行select查询语句，所以造成
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-24
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                0x00dream
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/CTF/">
+                            <span class="chip bg-color">CTF</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2025/04/17/hw/ying-ji-xiang-ying/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="应急响应">
+                            
+                            <span class="card-title">应急响应</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                一、Linux1.进程ps -ef
+
+2.服务systemctl list-unit-files --type=service
+
+3.计划任务crontab -l   查看
+crontab -r   删除
+
+4.端口netstat -tul
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-17
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                0x00dream
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/HW/">
+                            <span class="chip bg-color">HW</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2025/04/07/nei-wang-shen-tou/nei-wang-xin-xi-shou-ji/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="内网信息收集">
+                            
+                            <span class="card-title">内网信息收集</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                一、windows1.信息收集命令systeminfo  #查看系统信息，如OS版本、补丁安装情况
+net start   # 查看启动进程，从而判断该主机在域中扮演的角色
+tasklist  # 查看进程列表
+netstat -ano  
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-07
                             </span>
                             <span class="publish-author">
                                 
@@ -866,352 +1210,6 @@ Kerberos 协议流
                         
                         <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
                             <span class="chip bg-color">内网渗透</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2025/02/07/java-an-quan/jwt-an-quan/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="JWT安全">
-                            
-                            <span class="card-title">JWT安全</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                一、Druid泄漏（和Actuator监控系统类似）
-未授权访问：/druid/websession.html
-信息泄露：泄露session等信息、数据库执行信息、url路径等信息
-
-二、swagger API测试接口测试未授权访问漏洞利用
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-07
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                0x00dream
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/java%E5%AE%89%E5%85%A8/">
-                            <span class="chip bg-color">java安全</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2025/01/27/java-an-quan/jndi-zhu-ru/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="JNDI注入">
-                            
-                            <span class="card-title">JNDI注入</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                 JNDI： RMI:远程方法调用注册表
-​            LDAP:轻量级目录访问协议
-一、java五大组件
-shiro–数据包中cookie中有rememberme
-fastjson–反序列化方法–JSON.parseObjec
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-01-27
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                0x00dream
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/java%E5%AE%89%E5%85%A8/">
-                            <span class="chip bg-color">java安全</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2025/01/24/java-an-quan/mybatis-zhu-ru/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Mybatis注入">
-                            
-                            <span class="card-title">Mybatis注入</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                ## 一、JDBC-SQL注入导致SQL注入：1. 拼接导致SQL注入，不再赘述
-​                        2. preparestatement预编译，但SQL语句仍是拼接而没有?占位符，也会导致SQL注入。
-防止
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-01-24
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                0x00dream
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/java%E5%AE%89%E5%85%A8/">
-                            <span class="chip bg-color">java安全</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2025/01/23/web-an-quan/app-xin-xi-shou-ji/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="APP信息收集">
-                            
-                            <span class="card-title">APP信息收集</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                 通过获取APP配置、数据包，去获取url、api、osskey、js等敏感信息。
-
-资产信息–IP  域名  网站
-泄露信息–配置key  资源文件
-代码信息–java代码安全问题
-
-一、静态分析APPinfoScanner工具
-pyth
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-01-23
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                0x00dream
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/web%E5%AE%89%E5%85%A8/">
-                            <span class="chip bg-color">web安全</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2024/12/22/web-an-quan/cookie-he-session-de-qu-bie/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="cookie和session的区别">
-                            
-                            <span class="card-title">cookie和session的区别</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                区别
-cookie存储在浏览器，session存储在服务器。
-session比cookie更复杂一些。
-
-
-
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-12-22
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                0x00dream
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/web%E5%AE%89%E5%85%A8/">
-                            <span class="chip bg-color">web安全</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2024/12/19/web-an-quan/zheng-shu-yi-chu/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="整数溢出">
-                            
-                            <span class="card-title">整数溢出</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                整数溢出uint8 -&gt; 0-255
-uint16 -&gt; 0-65535
-uint32 -&gt; 0-4294967295
-uint36 -&gt; 0-18446744073709551615
-int8 -&gt; -127
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-12-19
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                0x00dream
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/web%E5%AE%89%E5%85%A8/">
-                            <span class="chip bg-color">web安全</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2024/12/17/java-an-quan/java-an-quan-zhi-actuator-jian-kong-xi-tong-lou-dong/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="java安全之actuator监控系统漏洞">
-                            
-                            <span class="card-title">java安全之actuator监控系统漏洞</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                漏洞原理actuator是SpringBoot里一个服务器信息的监控系统，会监控服务器缓存、内存、配置信息等的使用情况。
-默认端口是8081，可以查看到它的监控各种信息的路径
-
-其中的heapdump这个信息最为重要，访问将其下载下来
-
-然
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-12-17
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                0x00dream
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/java%E5%AE%89%E5%85%A8/">
-                            <span class="chip bg-color">java安全</span>
                         </a>
                         
                     </div>
@@ -1236,7 +1234,7 @@ int8 -&gt; -127
             
         </div>
         <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">1 / 4</div>
+            <div class="center-align b-text-gray">1 / 6</div>
         </div>
         <div class="col s6 m4 l4">
             
@@ -1268,7 +1266,7 @@ int8 -&gt; -127
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">32.9k</span>
+                        class="white-color">46.7k</span>
             
             
             

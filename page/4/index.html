@@ -348,29 +348,28 @@
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2024/08/06/er-jin-zhi-an-quan/pwn-xiang-guan-gong-ju-shi-yong/">
+                    <a href="/2024/11/20/web-an-quan/ti-quan/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="pwn相关工具使用">
+                            <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="提权">
                             
-                            <span class="card-title">pwn相关工具使用</span>
+                            <span class="card-title">提权</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                checksec查看程序的保护
-checksec   --file='./vul'
-
-ROPgadget查看程序中指令片段地址
-ropgadget   --binary  ./vul   --only  'pop|ret'  | grep 
+                                1.系统内核漏洞提权uname -a  #查看系统内核和版本信息
+然后searchexploit查找漏洞的exp
+	searchexploit 39166  # ubantu 14.04 的提权脚本
+或者http://www.exploit
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-11-20
                             </span>
                             <span class="publish-author">
                                 
@@ -384,8 +383,8 @@ ropgadget   --binary  ./vul   --only  'pop|ret'  | grep
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/">
-                            <span class="chip bg-color">二进制安全</span>
+                        <a href="/tags/web%E5%AE%89%E5%85%A8/">
+                            <span class="chip bg-color">web安全</span>
                         </a>
                         
                     </div>
@@ -397,30 +396,365 @@ ropgadget   --binary  ./vul   --only  'pop|ret'  | grep
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2024/08/06/er-jin-zhi-an-quan/zhan-yi-chu/zhan-yi-chu-zhi-exp/">
+                    <a href="/2024/11/19/web-an-quan/yi-ju-hua-mu-ma/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="栈溢出之exp">
+                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="一句话木马">
                             
-                            <span class="card-title">栈溢出之exp</span>
+                            <span class="card-title">一句话木马</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                
-首先加载库函数  （pwntools）
-from pwn import *
+                                1.php一句话木马&lt;?php @eval($_POST['cmd']); ?&gt;
 
-常用函数shellcraft.sh()   # 字符串类型的shellcode
-asm()    asm(shellcraft.sh())   # 将字符串打包
+.htaccess配置文件
+&lt;FilesMatch "1.jpg"&gt;
+sethandler application/x-httpd-
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-11-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                0x00dream
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/web%E5%AE%89%E5%85%A8/">
+                            <span class="chip bg-color">web安全</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2024/11/19/web-an-quan/pop3-deng-lu-zhi-ling/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="pop3登录指令">
+                            
+                            <span class="card-title">pop3登录指令</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                hydra暴力破解pop3用户名密码后，使用nc 登录进去
+nc 192.168.18.20 &lt;port&gt;
+user &lt;username&gt;
+pass &lt;password&gt;
+list  # 返回每个邮件的大
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-11-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                0x00dream
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/web%E5%AE%89%E5%85%A8/">
+                            <span class="chip bg-color">web安全</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2024/11/19/web-an-quan/md5-jia-mi-hou-wei-0-de-zi-fu-chuan/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="md5加密后为0的字符串">
+                            
+                            <span class="card-title">md5加密后为0的字符串</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                # md5强比较时可用
+如
+    if ((string)$_POST['a'] !== (string)$_POST['b'] &amp;&amp; md5($_POST['a']) === md5($_POST['b'])) {
+  
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-11-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                0x00dream
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/web%E5%AE%89%E5%85%A8/">
+                            <span class="chip bg-color">web安全</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2024/10/22/java-an-quan/java-fan-xu-lie-hua/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="java反射机制">
+                            
+                            <span class="card-title">java反射机制</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                一、反射式编程指计算机程序在运行时可以访问、检测和修改它本身状态或行为的一种能力。
+java.lang.Class     //获取类对象
+Class.forName(className)  //获取类对象
+newInstance     
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-10-22
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/java%E5%AE%89%E5%85%A8/" class="post-category">
+                                    java安全
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/java%E5%AE%89%E5%85%A8/">
+                            <span class="chip bg-color">java安全</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2024/09/30/java-an-quan/fastjson-fan-xu-lie-hua/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="fastjson反序列化">
+                            
+                            <span class="card-title">fastjson反序列化</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.fastjson介绍fastjson是java中处理序列化与反序列化的一个库，fastjson.Json将java类序列化json格式的字符串，fastjson.parse和fastjson.Objectparse将json格式的字符串
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-30
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/java%E5%AE%89%E5%85%A8/" class="post-category">
+                                    java安全
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/java%E5%AE%89%E5%85%A8/">
+                            <span class="chip bg-color">java安全</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2024/09/22/er-jin-zhi-an-quan/dui-yi-chu/dui-yi-chu-er/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="堆溢出(二)">
+                            
+                            <span class="card-title">堆溢出(二)</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.malloc2.free3.calloc分配所需的内存空间，并返回一个（一组）指向它（它们）的指针。
+malloc和calloc之间的不同点是，malloc不会设置内存为0，而calloc会设置分配的内存为0
+4.realloc更改已经
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-22
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                0x00dream
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8-%E5%A0%86%E6%BA%A2%E5%87%BA/">
+                            <span class="chip bg-color">二进制安全, 堆溢出</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2024/09/21/er-jin-zhi-an-quan/dui-yi-chu/unlink/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="unlink">
+                            
+                            <span class="card-title">unlink</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                概念1.简介俗称脱链，就是将链表头处的free堆块从unsorted bin中脱离出来，然后和物理地址相邻的新free的堆块合并成大堆块（向前合并或者向后合并），再放入到unsorted bin中。
+把两个free掉的物理相邻的两个堆块合并
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-21
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                0x00dream
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8-%E5%A0%86%E6%BA%A2%E5%87%BA/">
+                            <span class="chip bg-color">二进制安全, 堆溢出</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2024/09/04/er-jin-zhi-an-quan/zhan-yi-chu/srop/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="SROP">
+                            
+                            <span class="card-title">SROP</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.S(Signal)ROP漏洞原理在进行系统调用时，内核会保存断点信息，主要是将所有寄存器压入栈中，以及压入signal信息，以及指向sigreturn的系统调用地址。我们称ucontext和siginfo这一段为signal frame
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-04
                             </span>
                             <span class="publish-author">
                                 
@@ -447,30 +781,27 @@ asm()    asm(shellcraft.sh())   # 将字符串打包
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2024/08/02/dai-ma-an-quan-yu-shen-ji/nei-cun-xie-lou/">
+                    <a href="/2024/09/03/er-jin-zhi-an-quan/zhan-yi-chu/zhan-qian-yi/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="内存泄漏">
+                            <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="栈迁移">
                             
-                            <span class="card-title">内存泄漏</span>
+                            <span class="card-title">栈迁移</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                姿势int a = new int;
-a = 1;
-free(a);
+                                1.定义原理：栈迁移实际上是解决当原始栈可读入字符串长度不够的情况下rop链往哪儿写的问题，因为rop链必须借助栈溢出来达到攻击手段，所以rop链必须写在栈上，所以我们需要改变rsp的值来改变栈帧为能容纳rop链的那块区域。
 
-原理：如果free掉该内存后，仍然访问该内存地址，导致泄露
-
+2.利用方式
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-03
                             </span>
                             <span class="publish-author">
                                 
@@ -484,8 +815,8 @@ free(a);
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%89%E5%85%A8%E4%B8%8E%E5%AE%A1%E8%AE%A1/">
-                            <span class="chip bg-color">代码安全与审计</span>
+                        <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8-%E6%A0%88%E6%BA%A2%E5%87%BA/">
+                            <span class="chip bg-color">二进制安全,栈溢出</span>
                         </a>
                         
                     </div>
@@ -497,29 +828,26 @@ free(a);
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2024/08/01/fuzz/afl/">
+                    <a href="/2024/09/03/er-jin-zhi-an-quan/zhan-yi-chu/ret2csu/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="AFL">
+                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="ret2csu">
                             
-                            <span class="card-title">AFL</span>
+                            <span class="card-title">ret2csu</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                比较有名的Fuzz工具
-Fuzz流程
-AFL原理
-fork-server作用：如上图，相当于目标程序和afl-fuzz的中间媒介，相当于一个传递测试用例和执行结果的管道。
-优化 AFL 在模糊测试中执行目标程序的方式，从而加速测试过程并降低
+                                1.定义ret2csu就是指利用glibc编译出的程序中普遍存在的一个函数__libc_csu_init，来当作万能的gadget控制函数的参数的。
+在想要构造rop链但没有pop rdi|rsi|rdx;ret时可以考虑通过ret2csu
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-03
                             </span>
                             <span class="publish-author">
                                 
@@ -533,8 +861,8 @@ fork-server作用：如上图，相当于目标程序和afl-fuzz的中间媒介�
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/Fuzz/">
-                            <span class="chip bg-color">Fuzz</span>
+                        <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8-%E6%A0%88%E6%BA%A2%E5%87%BA/">
+                            <span class="chip bg-color">二进制安全,栈溢出</span>
                         </a>
                         
                     </div>
@@ -546,74 +874,30 @@ fork-server作用：如上图，相当于目标程序和afl-fuzz的中间媒介�
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2024/07/30/er-jin-zhi-an-quan/csapp-lab2-phase-6/">
+                    <a href="/2024/09/01/web-an-quan/re-zheng-ze/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="CSAPP-lab2-phase_6">
+                            <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="re正则">
                             
-                            <span class="card-title">CSAPP-lab2-phase_6</span>
+                            <span class="card-title">re正则</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                汇编代码   0x00000000004010f4 &lt;+0&gt;:	push   r14
-   0x00000000004010f6 &lt;+2&gt;:	push   r13
-   0x00000000004010f8 &lt;
+                                
+绕过
+preg_match正则匹配可用\绕过，如cat—&gt;c\at
+
+
+
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-07-30
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                0x00dream
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8-%E9%80%86%E5%90%91/">
-                            <span class="chip bg-color">二进制安全,逆向</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2022/05/12/web-an-quan/msf/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="MSF">
-                            
-                            <span class="card-title">MSF</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                MSF介绍与实战1、它是一个渗透测试框架（模块介绍）
-auxiliary:辅助模块，辅助渗透（端口扫描、登陆密码爆破、漏洞验证等）
-exploits(exp):漏洞利用模块，包含主流的漏洞利用脚本，通常是对某些可能存在漏洞的目标进行漏洞利用
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-01
                             </span>
                             <span class="publish-author">
                                 
@@ -641,235 +925,6 @@ exploits(exp):漏洞利用模块，包含主流的漏洞利用脚本，通常是
             </div>
               <!-- 隐藏某个文章 -->
             
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2022/04/09/dai-ma-an-quan-yu-shen-ji/c-c-an-quan-zhi-nan/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="c,c++安全指南">
-                            
-                            <span class="card-title">c,c++安全指南</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                
-  目录
-
-
-
-1 通用安全指南
-I. C/C++使用错误
-  1.1 不得直接使用无长度限制的字符拷贝函数
-  1.2 创建进程类的函数的安全规范
-  1.3 尽量减少使用 _alloca 和可变长度数组
-  1.4 printf系列参
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-09
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                0x00dream
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%89%E5%85%A8%E4%B8%8E%E5%AE%A1%E8%AE%A1/">
-                            <span class="chip bg-color">代码安全与审计</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/11/14/ai-an-quan/ai-an-quan-zhi-dui-kang-yang-ben-gong-ji/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="AI安全之对抗样本攻击">
-                            
-                            <span class="card-title">AI安全之对抗样本攻击</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                AI安全之对抗样本攻击概念对抗样本，就是对输入数据进行略微修改，以使得机器学习算法对该输入给出错误的分类结果。在很多情况下，这些修改非常细微，人类观察者甚至根本不会注意到这些修改，但是分类器却会因此犯错误。对抗样本攻击对目前的机器学习系统提
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-14
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                0x00dream
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/AI%E5%AE%89%E5%85%A8/">
-                            <span class="chip bg-color">AI安全</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/11/14/ai-an-quan/ai-an-quan-mian-lin-de-feng-xian-yu-tiao-zhan/">
-                        <div class="card-image">
-                            
-                            <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic1.zhimg.com%2Fv2-cf0e7b383d7f58141bf778ec2d29bd18_1200x500.jpg&refer=http%3A%2F%2Fpic1.zhimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639451864&t=dee7469a33efdfce6d686fb226d09973" class="responsive-img" alt="AI安全面临的风险与挑战">
-                            
-                            <span class="card-title">AI安全面临的风险与挑战</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                （一）人工智能安全挑战人工智能“基础化”加速，基础设施面临安全挑战2020 年 5 月，我国《政府工作报告》提出以  5G、人工智能等为代表的新型基础设施建设政策，此举按下了人工智能国家战略推进的快进键。随后，25 省市发布“新基建”政策方
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-14
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                0x00dream
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/AI%E5%AE%89%E5%85%A8/">
-                            <span class="chip bg-color">AI安全</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/11/09/xin-xi-an-quan/wei-xie-jian-mo/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="威胁建模">
-                            
-                            <span class="card-title">威胁建模</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                什么是威胁建模威胁建模是一种分析应用程序安全性的结构化方法，可以用来识别、量化和降低应用程序安全风险。主要管理流程包含如下：
-
-标识资源：找出系统必须保护的有价值的资源
-创建总体体系结构：利用简单的图表来记录应用程序的体系结构，包括子系统、
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-09
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                0x00dream
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/">
-                            <span class="chip bg-color">信息安全</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/11/08/hello-world/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                            
-                            <span class="card-title">Hello World</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-08
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                0x00dream
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
         </div>
     </article>
 
@@ -887,11 +942,12 @@ I. C/C++使用错误
             
         </div>
         <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">4 / 4</div>
+            <div class="center-align b-text-gray">4 / 6</div>
         </div>
         <div class="col s6 m4 l4">
             
-            <a class="right btn-floating btn-large disabled">
+            <a href="/page/5/"
+               class="right btn-floating btn-large waves-effect waves-light bg-color">
                 <i class="fas fa-angle-right"></i>
             </a>
             
@@ -918,7 +974,7 @@ I. C/C++使用错误
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">32.9k</span>
+                        class="white-color">46.7k</span>
             
             
             

